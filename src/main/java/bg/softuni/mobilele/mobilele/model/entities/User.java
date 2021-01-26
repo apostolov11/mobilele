@@ -1,4 +1,4 @@
-package bg.softuni.mobilele.mobilele.entities;
+package bg.softuni.mobilele.mobilele.model.entities;
 
 import javax.persistence.*;
 import java.util.List;
