@@ -1,7 +1,10 @@
 package bg.softuni.mobilele.mobilele.service;
 
-import org.springframework.stereotype.Service;
+import bg.softuni.mobilele.mobilele.model.view.BrandViewModel;
 
-@Service
-public class BrandService {
+import java.util.List;
+
+public interface BrandService {
+
+    List<BrandViewModel> getAllBrands();
 }
