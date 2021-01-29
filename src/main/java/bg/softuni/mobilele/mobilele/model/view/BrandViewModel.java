@@ -1,15 +1,21 @@
 package bg.softuni.mobilele.mobilele.model.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BrandViewModel {
 
     private String name;
 
-    private List<ModelVewModel> models;
+    private List<ModelVewModel> models = new ArrayList<>();
 
     public List<ModelVewModel> getModels() {
         return models;
+    }
+
+    public BrandViewModel addModel (ModelVewModel modelVewModel) {
+        this.models.add(modelVewModel);
+        return this;
     }
 
     public void setModels(List<ModelVewModel> models) {
