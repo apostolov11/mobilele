@@ -3,13 +3,18 @@ package bg.softuni.mobilele.mobilele;
 import bg.softuni.mobilele.mobilele.model.entities.BaseEntity;
 import bg.softuni.mobilele.mobilele.model.entities.Brand;
 import bg.softuni.mobilele.mobilele.model.entities.Model;
+import bg.softuni.mobilele.mobilele.model.entities.Offer;
+import bg.softuni.mobilele.mobilele.model.entities.enums.EngineEnum;
 import bg.softuni.mobilele.mobilele.model.entities.enums.ModelCategory;
+import bg.softuni.mobilele.mobilele.model.entities.enums.TransmissionEnum;
 import bg.softuni.mobilele.mobilele.repository.BrandRepository;
 import bg.softuni.mobilele.mobilele.repository.ModelRepository;
+import bg.softuni.mobilele.mobilele.repository.OfferRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
 
+import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.List;
 
@@ -18,10 +23,12 @@ public class DBInit implements CommandLineRunner {
 
     private final ModelRepository modelRepository;
     private final BrandRepository brandRepository;
+    private final OfferRepository offerRepository;
 
-    public DBInit(ModelRepository modelRepository, BrandRepository brandRepository) {
+    public DBInit(ModelRepository modelRepository, BrandRepository brandRepository, OfferRepository offerRepository) {
         this.modelRepository = modelRepository;
         this.brandRepository = brandRepository;
+        this.offerRepository = offerRepository;
     }
 
 
@@ -38,10 +45,30 @@ public class DBInit implements CommandLineRunner {
         setCurrentTimestamps(hondaBrand);
 
         brandRepository.saveAll(List.of(fordBrand, hondaBrand));
-        initFiesta(fordBrand);
+
+        Model fiestaModel = initFiesta(fordBrand);
         initEscort(fordBrand);
         initNC750S(hondaBrand);
+        createFiestaOffer(fiestaModel);
 
+
+    }
+
+    private void createFiestaOffer(Model model) {
+        Offer fiestaOffer = new Offer();
+
+        fiestaOffer.setEngine(EngineEnum.GASOLINE);
+        fiestaOffer.setImageUrl("https://www.gannett-cdn.com/presto/2020/04/13/PDTN/baf39f3d-aebb-4c59-8e98-711fdfb3b5c4-fiesta_fr3-4.JPG");
+        fiestaOffer.setMileage(80000);
+        fiestaOffer.setPrice(BigDecimal.valueOf(10000));
+        fiestaOffer.setYear(2019);
+        fiestaOffer.setDescription("Карана е от немска баба. Зимата в гараш");
+        fiestaOffer.setTransmission(TransmissionEnum.MANUAL);
+        fiestaOffer.setModel(model);
+
+        setCurrentTimestamps(fiestaOffer);
+
+        offerRepository.save(fiestaOffer);
 
     }
 
@@ -60,8 +87,6 @@ public class DBInit implements CommandLineRunner {
         return modelRepository.save(nc750s);
 
     }
-
-
 
     private  Model initEscort(Brand fordBrand) {
         Model fiesta = new Model();

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BrandsController {
 
 
-    private BrandService brandService;
+    private final BrandService brandService;
 
     public BrandsController(BrandService brandService) {
 

@@ -34,8 +34,8 @@ public class Offer extends BaseEntity {
     @ManyToOne
     private Model model;
 
-    @ManyToOne
-    private User user;
+//    @ManyToOne
+//    private User user;
 
     public EngineEnum getEngine() {
         return engine;
@@ -92,14 +92,14 @@ public class Offer extends BaseEntity {
     public void setModel(Model model) {
         this.model = model;
     }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     public String getDescription() {
         return description;
@@ -120,7 +120,7 @@ public class Offer extends BaseEntity {
                 ", transmission=" + transmission +
                 ", year=" + year +
                 ", model=" + model +
-                ", user=" + user +
+//                ", user=" + user +
                 '}';
     }
 }
